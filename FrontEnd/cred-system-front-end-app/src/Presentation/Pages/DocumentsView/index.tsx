@@ -51,8 +51,8 @@ const DocumentsView = ()=>{
 
     const downloadSelectedDocuments = async () => {
         // Transform the allChecked array
-        const filesToDownload = allChecked.map(filename => ({ azureBlobFilename: filename }));
-        await getDownloadSelectedDocument(api, filesToDownload);
+        const filesToDownload = allChecked.map(filename => (filename));
+        await getDownloadSelectedDocument(api, providerInfo.providerId, filesToDownload);
     }
 
     useEffect(() => {

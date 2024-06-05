@@ -51,9 +51,11 @@ const ReviewDelegate = ({ goBack, goHome }: ReviewDelegateProps) => {
       return;
     }
 
-    await notifyProvider(api, formData.setup.providerEmail).then(async () => {
+    const delegateId = sessionStorage.getItem("delegateId") ?? "0";
+    const providerId = JSON.parse(sessionStorage.getItem('provider') ?? "{}").providerId;
+    await notifyProvider(api, formData.setup.providerEmail, delegateId, providerId).then(async () => {
       formData.setup.currentStep = "Notify"
-      await postForm(api, parseInt(JSON.parse(sessionStorage.getItem('provider') ?? "{}").providerId), formData, []);
+      await postForm(api, parseInt(providerId), formData, []);
       navigate('/cred/delegate-notify');
     });
   }

@@ -36,7 +36,8 @@ const ProviderReview = () => {
     }
     try {
       const id = providerInfo?.StatusSummary?.picsId ?? 0;
-      const response = await updateInsurerFormStatus(api, id, newStatus, comment);
+      const providerId = providerInfo?.StatusSummary?.providerId ?? 0;
+      const response = await updateInsurerFormStatus(api, providerId, id, newStatus, comment);
       if (response?.status === 200) {
         console.log('200 here');
         window.location.reload();

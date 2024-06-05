@@ -35,7 +35,7 @@ const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       await getProviderByEmail(api, email).then(res => {
-        if (res?.id) {
+        if (res?.providerId) {
           setInfoExist(true);
         }
       });

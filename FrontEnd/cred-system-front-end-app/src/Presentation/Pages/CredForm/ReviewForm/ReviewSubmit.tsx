@@ -18,7 +18,7 @@ const ReviewSubmit = () => {
 
   const handleDownload = async () => {
     setFileName(sessionStorage.getItem('formFilename') ?? '');
-    await getDownloadDocument(api, filename, 'Individual and Incorporated Provider Credentialing Application');
+    await getDownloadDocument(api, "0", filename, 'Individual and Incorporated Provider Credentialing Application');
   }
 
     useLayoutEffect(() => {

@@ -6,7 +6,7 @@ import { BASE_URL } from "../axiosConfig";
 export const inviteInsurer = async (api: AxiosInstance, email: string) => {
   try {
     const response = await api.post(
-      BASE_URL + "/api/Notification/InsurerEmployee",
+      BASE_URL + "/api/insurers/employees",
       {
         email: email,
       },
@@ -26,7 +26,7 @@ export const registerAdminInsurer = async (api: AxiosInstance, adminInsurerInfo:
 
   try {
     const response = await api.put(
-      BASE_URL + "/api/Insurer/UpdateInsurerAdmin",
+      BASE_URL + "/api/insurers/admins",
       adminInsurerInfo,
         {
         headers: {
@@ -42,7 +42,7 @@ export const registerAdminInsurer = async (api: AxiosInstance, adminInsurerInfo:
 
 export const getInsurersList = async (api: AxiosInstance, currentPage: number, limitPerPage: number) => {
   try {
-    const response = await api.get(BASE_URL + `/api/Insurer/GetEmployees?currentPage=${currentPage}&limitPerPage=${limitPerPage}`)
+    const response = await api.get(BASE_URL + `/api/insurers/employees?currentPage=${currentPage}&limitPerPage=${limitPerPage}`)
     return response.data;
   } catch (error) {
     console.log("Insurer not found");
@@ -52,10 +52,7 @@ export const getInsurersList = async (api: AxiosInstance, currentPage: number, l
 
 export const getInsurerAdminValidation = async (api: AxiosInstance, email: string) => {
   try {
-    const response = await api.post(BASE_URL + `/api/Insurer/ValidateInsurerAdmin`, 
-    {
-      email: email
-    })
+    const response = await api.post(BASE_URL + `/api/insurers/admin/${email}/valid`)
     return response;
   } catch (error) {
     console.log("Insurer not found");
@@ -66,9 +63,8 @@ export const getInsurerAdminValidation = async (api: AxiosInstance, email: strin
 export const updateInsurerStatus = async (api: AxiosInstance, email: string, isActive: boolean) => {
   try {
     const response = await api.put(
-      BASE_URL + "/api/Insurer/SetEmployeeStatus",
+      BASE_URL + `/api/insurers/employees/${email}`,
       {
-        email: email,
         isActive: isActive
       },
       {
@@ -86,7 +82,7 @@ export const updateInsurerStatus = async (api: AxiosInstance, email: string, isA
 
 export const getProviderStatusHistory = async (api: AxiosInstance, providerId: number) => {
   try {
-    const response = await api.get(BASE_URL + `/api/Insurer/StatusHistory?providerId=${providerId}`)
+    const response = await api.get(BASE_URL + `/api/insurers/providers/${providerId}/credentialing-forms/statuses`)
     return response.data;
   } catch (error) {
     console.log("Provider history list not found");
@@ -94,10 +90,10 @@ export const getProviderStatusHistory = async (api: AxiosInstance, providerId: n
   }
 };
 
-export const updateInsurerFormStatus = async (api: AxiosInstance, picsId: number, statusCode: string, comment: string) => {
+export const updateInsurerFormStatus = async (api: AxiosInstance, providerId: number, picsId: number, statusCode: string, comment: string) => {
   try {
-    const response = await api.put(
-      BASE_URL + "/api/Insurer/SetStatus",
+    const response = await api.patch(
+      BASE_URL + `/api/insurers/providers/${providerId}/credentialing-forms/statuses`,
       {
         picsId: picsId,
         statusCode: statusCode,

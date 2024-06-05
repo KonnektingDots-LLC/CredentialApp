@@ -184,7 +184,7 @@ const CredInputFiles = ({title, description, fileId, required, documentTypeId, d
             const email = msalInstance.getActiveAccount()?.username as string;
             const providerIdByEmail = await getProviderByEmail(api, email);
 
-            const provider = { providerId: providerIdByEmail.id}
+            const provider = { providerId: providerIdByEmail.providerId}
             sessionStorage.setItem('provider', JSON.stringify(provider));
             
         }
@@ -200,7 +200,7 @@ const CredInputFiles = ({title, description, fileId, required, documentTypeId, d
                 const email = msalInstance.getActiveAccount()?.username as string;
                 const providerIdByEmail = await getProviderByEmail(api, email);
 
-                const provider = { providerId: providerIdByEmail.id}
+                const provider = { providerId: providerIdByEmail.providerId}
                 sessionStorage.setItem('provider', JSON.stringify(provider));
                 
             }

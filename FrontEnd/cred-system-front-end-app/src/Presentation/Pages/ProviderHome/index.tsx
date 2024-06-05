@@ -22,20 +22,20 @@ const ProviderHome = () => {
         return;
     }
 
-    const credFormByEmail = await getCredFormByEmail(api, email);
+    const credFormByEmail = await getCredFormByEmail(api, providerIdByEmail.providerId, email);
     if (credFormByEmail?.id) {
       const providerIdByEmail = await getProviderByEmail(api, email);
-      if (providerIdByEmail.id) {
-        const provider = { providerId: providerIdByEmail.id}
+      if (providerIdByEmail.providerId) {
+        const provider = { providerId: providerIdByEmail.providerId}
         sessionStorage.setItem('provider', JSON.stringify(provider));    
       }
     }
 
-    const credFormStatus = await getCredFormByCredFormId(api, credFormByEmail?.credFormId);
+    const credFormStatus = await getCredFormByCredFormId(api, providerIdByEmail.providerId, credFormByEmail?.credFormId);
 
     setFormCompleted(credFormStatus.providerStatus !== "DRAFT");
     setFormNotCompleted(credFormStatus.providerStatus === "DRAFT");
-    sessionStorage.setItem('provider', JSON.stringify({providerId: providerIdByEmail.id}));  
+    sessionStorage.setItem('provider', JSON.stringify({providerId: providerIdByEmail.providerId}));
   }
 
   useEffect(() => {

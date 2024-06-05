@@ -5,7 +5,7 @@ import { Files } from "../../Application/interfaces";
   
 export const getForm = async (api: AxiosInstance, providerId: number) => {
     try {
-        const response = await api.get(BASE_URL + `/api/Provider/GetJsonProviderDraft?providerId=${providerId}`)
+        const response = await api.get(BASE_URL + `/api/providers/${providerId}/credentialing-forms/snapshot`)
         return JSON.parse(response.data.jsonBody)
     } catch(error) {
         return null;
@@ -50,7 +50,7 @@ export const postForm = async (
     }
 
     try {
-        const response = await api.post(BASE_URL + '/api/Document/MultiUpload', formData, {
+        const response = await api.put(BASE_URL + `/api/providers/${providerId}/credentialing-forms/snapshot`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
@@ -64,7 +64,7 @@ export const postForm = async (
 
 export const getValidationNPI = async (api: AxiosInstance, npi: string) => {
     try {
-        const response = await api.get(BASE_URL + `/api/NPI/IsValid?request=${npi}`, {
+        const response = await api.get(BASE_URL + `/api/admin/helpers/npi/${npi}/valid`, {
             validateStatus: null,
         });
         return response.data;
@@ -73,9 +73,9 @@ export const getValidationNPI = async (api: AxiosInstance, npi: string) => {
     }
 };
 
-export const submitForm = async (api: AxiosInstance, jsonFormatted: any, jsonDraft: any) => {
+export const submitForm = async (api: AxiosInstance, providerId: number, jsonFormatted: any, jsonDraft: any) => {
     try {
-        const response = await api.post(BASE_URL + `/api/Submit/SubmitAll`, 
+        const response = await api.post(BASE_URL + `/api/providers/${providerId}/credentialing-forms`,
             {
                 jsonSubmit: jsonFormatted,
                 jsonProviderForm: JSON.stringify(jsonDraft)

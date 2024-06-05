@@ -4,10 +4,8 @@ import { AdminInfo } from "../../Application/interfaces";
 
 export const getAdminValidation = async (api: AxiosInstance, email: string) => {
     try {
-      const response = await api.post(BASE_URL + `/api/OCSAdmin/ValidateOCSAdmin`,
-      {
-        email: email
-      },{
+      const response = await api.post(BASE_URL + `/api/admin/users/${email}/valid`,
+      {},{
         headers: {
           "Content-Type": "application/json",
         },
@@ -24,7 +22,7 @@ export const getAdminValidation = async (api: AxiosInstance, email: string) => {
 
     try {
       const response = await api.put(
-        BASE_URL + "/api/OCSAdmin/UpdateOCSAdmin",
+        BASE_URL + `/api/admin/users/${insurerInfo.email}`,
           insurerInfo,
           {
           headers: {

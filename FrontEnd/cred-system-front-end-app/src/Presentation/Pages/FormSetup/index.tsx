@@ -113,7 +113,7 @@ const FormSetup = ()=> {
                     navigate('/user-info');
                     return;
                 }
-                const provider = { providerId: providerIdByEmail.id}
+                const provider = { providerId: providerIdByEmail.providerId}
                 sessionStorage.setItem('provider', JSON.stringify(provider));  
             }
             const providerId = JSON.parse(sessionStorage.getItem('provider') || '{}').providerId;

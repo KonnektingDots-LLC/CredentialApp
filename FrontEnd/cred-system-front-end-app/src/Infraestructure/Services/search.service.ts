@@ -33,7 +33,7 @@ export default SearchService;
 
 export const searchProviderList = async (api: AxiosInstance, currentPage: number, limitPerPage: number, searchTerm: string) => {
   try {
-    const response = await api.get(BASE_URL + `/api/Provider/All?CurrentPage=${currentPage}&limitPerPage=${limitPerPage}&search=${searchTerm}`)
+    const response = await api.get(BASE_URL + `/api/providers?currentPage=${currentPage}&limitPerPage=${limitPerPage}&search=${searchTerm}&dofilterByRole=true`)
     console.log('searchProviderList', response);
     return response.data;
   } catch (error) {
@@ -44,7 +44,7 @@ export const searchProviderList = async (api: AxiosInstance, currentPage: number
 
 export const searchInsurersList = async (api: AxiosInstance, currentPage: number, limitPerPage: number, searchTerm: string) => {
   try {
-    const response = await api.get(BASE_URL + `/api/Insurer/GetEmployees?currentPage=${currentPage}&limitPerPage=${limitPerPage}&search=${searchTerm}`)
+    const response = await api.get(BASE_URL + `/api/insurers/employees?currentPage=${currentPage}&limitPerPage=${limitPerPage}&search=${searchTerm}`)
     console.log('searchInsurersList', response);
     return response.data;
   } catch (error) {

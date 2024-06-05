@@ -43,7 +43,7 @@ const DocumentsTable = ({data, setCountSelectedFiles, providerId, allChecked, se
     }
 
     const downloadDocument = async (documentId: string, name: string) => {
-        await getDownloadDocument(api, documentId, name);
+        await getDownloadDocument(api, providerId, documentId, name);
     }
 
     const downloadAllDocument = async () => {
@@ -51,7 +51,7 @@ const DocumentsTable = ({data, setCountSelectedFiles, providerId, allChecked, se
     }
 
     const handleOpenDocument = async (filename: string) => {
-        await getOpenDocument(api, filename)
+        await getOpenDocument(api, providerId, filename)
     }
     
     const handleSelectAll = (event: any) => {

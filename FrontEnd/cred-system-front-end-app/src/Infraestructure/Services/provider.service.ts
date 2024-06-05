@@ -5,10 +5,8 @@ import { msalInstance } from "../..";
 
 export const getProviderByEmail = async (api: AxiosInstance, email: string) => {
     try {
-        const response = await api.get(BASE_URL + `/api/Provider/ByEmail`, {
-          params: { email }
-        })
-        return response.data
+        const response = await api.get(BASE_URL + `/api/providers?email=${email}`)
+        return response.data.content[0]
     } catch(error) {
         return null;
     }
@@ -30,7 +28,7 @@ export const CreateUser = async (api: AxiosInstance, data: UserInfo | undefined)
         "multipleNPI": data?.multipleNpi
     }
     try {
-        const response = await api.post(BASE_URL + '/api/CredForm/Create', json, {
+        const response = await api.post(BASE_URL + '/api/providers', json, {
             headers: {
                 'Content-Type': 'application/json'
             }});      
@@ -43,7 +41,7 @@ export const CreateUser = async (api: AxiosInstance, data: UserInfo | undefined)
 
 export const getProviderType = async (api: AxiosInstance) => {
     try {
-        const response = await api.get(BASE_URL + `/api/Provider/ProviderType`)
+        const response = await api.get(BASE_URL + `/api/admin/ui-lists/ProviderType`)
         return response.data
     } catch(error) {
         return null;
@@ -52,7 +50,7 @@ export const getProviderType = async (api: AxiosInstance) => {
 
 export const getDelegatesList = async (api: AxiosInstance, providerId: number, currentPage: number, limitPerPage: number) => {
     try {
-      const response = await api.get(BASE_URL + `/api/Delegate/ByProvider?id=${providerId}&currentPage=${currentPage}&limitPerPage=${limitPerPage}`)
+      const response = await api.get(BASE_URL + `/api/providers/${providerId}/delegates?currentPage=${currentPage}&limitPerPage=${limitPerPage}`)
       return response.data;
     } catch (error) {
       console.log("Delegates list not found");
@@ -62,10 +60,9 @@ export const getDelegatesList = async (api: AxiosInstance, providerId: number, c
 
 export const updateDelegateStatus = async (api: AxiosInstance, delegateId: number, isActive: boolean) => {
     try {
-      const response = await api.put(
-        BASE_URL + "/api/Delegate/SetStatus",
+      const response = await api.patch(
+        BASE_URL + `/api/delegates/${delegateId}`,
         {
-          delegateId: delegateId,
           isActive: isActive
         },
         {
@@ -83,7 +80,7 @@ export const updateDelegateStatus = async (api: AxiosInstance, delegateId: numbe
 
 export const getProviderFormStatusList = async (api: AxiosInstance, providerId: number, currentPage: number, limitPerPage: number) => {
   try {
-    const response = await api.get(BASE_URL + `/api/Insurer/Status?currentPage=${currentPage}&limitPerPage=${limitPerPage}&providerId=${providerId}`)
+    const response = await api.get(BASE_URL + `/api/providers/${providerId}/credentialing-forms/statuses?currentPage=${currentPage}&limitPerPage=${limitPerPage}`)
     return response.data;
   } catch (error) {
     console.log("Provider form status list not found");

@@ -1,9 +1,9 @@
 import { AxiosInstance } from "axios";
 import { BASE_URL } from "../axiosConfig";
 
-export const getCredFormByEmail = async (api: AxiosInstance, email: string) => {
+export const getCredFormByEmail = async (api: AxiosInstance, providerId: number, email: string) => {
     try {
-        const response = await api.get(BASE_URL + `/api/CredForm/ByEmail`, {
+        const response = await api.get(BASE_URL + `/api/providers/${providerId}/credentialing-forms`, {
           params: { email }
         })
         return response.data;
@@ -29,11 +29,9 @@ export const createCredForm = async (api: AxiosInstance, email: string) => {
     }
   };
 
-  export const getCredFormByCredFormId = async (api: AxiosInstance, credFormId: string) => {
+  export const getCredFormByCredFormId = async (api: AxiosInstance, providerId: number, credFormId: string) => {
     try {
-        const response = await api.get(BASE_URL + `/api/Provider/ByCredFormId`, {
-          params: { credFormId }
-        })
+        const response = await api.get(BASE_URL + `/api/providers/${providerId}/credentialing-forms/${credFormId}`)
         return response.data;
     } catch(error) {
         return null;

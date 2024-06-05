@@ -27,6 +27,7 @@ const DelegateWelcome = () => {
       const delegate = await getDelegate(api, email);
 
       if (delegate) {
+        sessionStorage.setItem("delegateId", delegate.id);
         const list = await getDelegateProviderList(api, delegate.id);
           if (list?.length) {
               setProviderList(list);

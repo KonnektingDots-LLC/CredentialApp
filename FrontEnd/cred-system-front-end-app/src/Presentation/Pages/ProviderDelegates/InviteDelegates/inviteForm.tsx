@@ -41,8 +41,8 @@ const InviteForm = ({ handleNext }: InviteFormProps) => {
   const onSubmit = async () => {
     try {
       await getProviderByEmail(api, email).then(async res => {
-        if (res?.id) {
-          await inviteDelegate(api, res.id, getValues("delegateEmail")).then(res => {
+        if (res?.providerId) {
+          await inviteDelegate(api, res.providerId, getValues("delegateEmail")).then(res => {
             if(res?.status === 200) {
               handleNext();
             }

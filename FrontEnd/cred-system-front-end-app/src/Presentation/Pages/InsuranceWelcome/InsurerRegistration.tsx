@@ -15,6 +15,7 @@ const InsurerRegistration = () => {
         try {
             const insurerValidation = await getInsurerEmployeeValidation(api, email);
             if (insurerValidation?.data.exists) {
+                const email = instance.getActiveAccount()?.username as string
                 // insurer found
                 const insurerInfo = {
                     name: instance.getActiveAccount()?.idTokenClaims?.given_name as string ?? "",
@@ -22,7 +23,7 @@ const InsurerRegistration = () => {
                     surName: instance.getActiveAccount()?.idTokenClaims?.family_name as string ?? "",
                     lastName: instance.getActiveAccount()?.idTokenClaims?.extension_LastName as string ?? ""
                 }
-                await registerInsurerEmployee(api, insurerInfo);
+                await registerInsurerEmployee(api, insurerInfo, email);
 
                 if (instance.getActiveAccount()?.idTokenClaims?.newUser) {
                     const email = instance.getActiveAccount()?.username as string;

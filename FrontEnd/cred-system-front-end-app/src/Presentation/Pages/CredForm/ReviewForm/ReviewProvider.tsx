@@ -145,7 +145,7 @@ const ReviewProvider = ({ goBack, goHome }: ReviewProviderProps) => {
       const formatter = jsonFormatter(formData);
       
       if (formData?.setup?.hasStarted && formData?.setup?.providerId !== 0) {
-        await submitForm(api, formatter, formData).then(res => {
+        await submitForm(api, formData?.setup?.providerId, formatter, formData).then(res => {
           if (res?.status === 200) {
             sessionStorage.setItem('formFilename', res?.data.filename);
             navigate('/cred/submit');

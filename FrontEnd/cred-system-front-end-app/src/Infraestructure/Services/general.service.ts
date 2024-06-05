@@ -5,7 +5,7 @@ export const postWelcomeEmail = async (api: AxiosInstance, email: string) => {
 
     try {
       const response = await api.post(
-        BASE_URL + "/api/Notification/Complete",
+        BASE_URL + "/api/admin/notifications",
         {
           email: email,
         },
