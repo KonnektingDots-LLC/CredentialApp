@@ -1,0 +1,48 @@
+name: Azure Static Web Apps CI/CD
+
+pr:
+  branches:
+    include:
+      - sonarQube
+trigger:
+  branches:
+    include:
+      - sonarQube
+
+variables:
+  test: 123
+
+
+jobs:
+- job: build_and_deploy_job
+  displayName: Build and Deploy Job
+  condition: or(eq(variables['Build.Reason'], 'Manual'),or(eq(variables['Build.Reason'], 'PullRequest'),eq(variables['Build.Reason'], 'IndividualCI')))
+  pool:
+    vmImage: ubuntu-latest
+  steps: 
+  - checkout: self
+    submodules: true
+  - task: SonarQubePrepare@4
+    inputs:
+      SonarQube: 'SonarQube-FE'
+      #scannerMode: 'CLI'
+      configFile: 'sonar-project.properties'
+      configMode: manual
+      projectKey: 'KonekktingDots_-_Credential_System_KonekktingDots_-_Credential_System_-_FE_AYrYKWLsrU2Z1thW6Ybp'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      workingDir: FrontEnd/cred-system-front-end-app/
+      command: 'custom'
+      customCommand: 'install'
+  - task: Npm@1
+    displayName: 'npm run build'
+    inputs:
+      workingDir: FrontEnd/cred-system-front-end-app/
+      command: 'custom'
+      customCommand: 'run build'
+  - task: SonarQubeAnalyze@4
+  - task: SonarQubePublish@4
+
+
+

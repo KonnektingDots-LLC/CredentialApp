@@ -1,0 +1,56 @@
+.cred-docs-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.cred-docs-table th {
+    background-color: #DFE1E2 !important;
+    color: white;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: start;
+}
+
+.cred-docs-table td {
+    border: none;
+    padding: 10px;
+}
+
+.cred-docs-table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+  }
+  
+.cred-docs-table tbody tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+
+.cred-docs-table th:first-child,
+.cred-docs-table td:first-child {
+    width: 45px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 12px;
+}
+
+.cred-docs-table th:nth-child(2),
+.cred-docs-table td:nth-child(2) {
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cred-docs-table th:last-child,
+.cred-docs-table td:last-child {
+    width: auto;
+    text-align: end;
+    padding-right: 12px;
+}
+
+.cred-docs-table td:last-child img {
+    margin-left: auto;
+}
+

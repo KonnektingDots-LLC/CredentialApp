@@ -1,0 +1,55 @@
+.delegate-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.delegate-table th {
+    background-color: #DFE1E2 !important;
+    color: white;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: start;
+}
+
+.delegate-table td {
+    border: none;
+    padding: 10px;
+}
+
+.delegate-table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+  }
+  
+.delegate-table tbody tr:nth-of-type(odd) {
+    background-color: #fff;
+}
+
+.delegate-table th:first-child,
+.delegate-table td:first-child {
+    width: 45px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 12px;
+}
+
+.delegate-table th:nth-child(2),
+.delegate-table td:nth-child(2) {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.delegate-table th:last-child,
+.delegate-table td:last-child {
+    display: flex;
+    width: 100%;
+    text-align: end;
+    justify-content: flex-end;
+    padding-right: 12px;
+    align-items: center;
+    gap: 40px; 
+}

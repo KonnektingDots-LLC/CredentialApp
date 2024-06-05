@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.usa-step-indicator__header{
+    display: none !important;
+}
+
+.test {
+    height: 100%;
+    background-color: aqua;
+}
+
+.Toastify__toast-container--top-center {
+    width: 65vw !important;
+    font-size: x-small !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@layer utilities {
+  .fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s forwards;
+  }
+
+  .fade-out {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    animation: fadeOut 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+}
